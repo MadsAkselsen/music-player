@@ -2,6 +2,10 @@ const image = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
+const progressContainer = document.getElementById('progress-container');
+const progress = document.getElementById('progress');
+const currentTimeElement = document.getElementById('current-time');
+const durationElement = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
@@ -83,14 +87,45 @@ function prevSong() {
   }
 }
 
-// Go to next song Event listener
+// Update progress bar and time
+function updateProgressBar(e) {
+  if (isPlaying) {
+    const { duration, currentTime } = e.srcElement;
+    // update progress bar width
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+    //calculate display for duration
+    const durationMinutes = Math.floor(duration / 60); // Minutes
+    let durationSeconds = Math.floor(duration % 60); // Seconds
+    // if below 10 add a "0" to the seconds. E.g. 8 becomes 08
+    if (durationSeconds < 10) {
+      durationSeconds = `0${durationSeconds}`;
+    }
+    // need to check if currentTime has been set, otherwise "NaN" is displayed for a moment
+    if (currentTime) {
+      durationElement.textContent = `${durationMinutes}:${durationSeconds}`;
+    }
+    //calculate display for currentTimeElement
+    const currentTimeMinutes = Math.floor(currentTime / 60); // Minutes
+    let currentTimeSeconds = Math.floor(currentTime % 60); // Seconds
+
+    if (currentTimeSeconds < 10) {
+      currentTimeSeconds = `0${currentTimeSeconds}`;
+    }
+    if (currentTime) {
+      currentTimeElement.textContent = `${currentTimeMinutes}:${currentTimeSeconds}`;
+    }
+  }
+}
+
+// Event listeners
 nextBtn.addEventListener('click', () => {
   nextSong();
 });
-// Go to prev song Event listener
 prevBtn.addEventListener('click', () => {
   prevSong();
 });
+music.addEventListener('timeupdate', (e) => updateProgressBar(e));
 
 // Update DOM
 function loadSong(song) {
