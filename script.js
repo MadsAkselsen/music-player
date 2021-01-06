@@ -118,14 +118,25 @@ function updateProgressBar(e) {
   }
 }
 
+// Set progress bar
+function setProgressBar(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const percentage = (clickX / width) * 100;
+  progress.style.width = `${percentage}%`;
+  music.currentTime = (music.duration / 100) * percentage;
+}
+
 // Event listeners
-nextBtn.addEventListener('click', () => {
-  nextSong();
-});
 prevBtn.addEventListener('click', () => {
   prevSong();
 });
-music.addEventListener('timeupdate', (e) => updateProgressBar(e));
+nextBtn.addEventListener('click', () => {
+  nextSong();
+});
+music.addEventListener('ended', nextSong);
+music.addEventListener('timeupdate', updateProgressBar);
+progressContainer.addEventListener('click', setProgressBar);
 
 // Update DOM
 function loadSong(song) {
