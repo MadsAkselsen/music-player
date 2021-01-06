@@ -105,6 +105,14 @@ h3 {
   top: 3px;
 }
 
+.disabled {
+  color: rgb(202, 202, 202);
+}
+
+.disabled:hover {
+  filter: brightness(100%);
+}
+
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 376px) {
   .player-container {
