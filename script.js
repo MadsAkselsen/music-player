@@ -130,6 +130,21 @@ function setProgressBar(e) {
   music.currentTime = (music.duration / 100) * percentage;
 }
 
+function toggleMute(e) {
+  music.muted = !music.muted;
+  if (music.muted === true) {
+    volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+  } else volumeIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+}
+
+function setVolumeBar(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const percentage = (clickX / width) * 100;
+  volumeBar.style.width = `${percentage}%`;
+  music.volume = percentage / 100;
+}
+
 // Event listeners
 prevBtn.addEventListener('click', () => {
   prevSong();
@@ -140,6 +155,8 @@ nextBtn.addEventListener('click', () => {
 music.addEventListener('ended', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
+volumeContainer.addEventListener('click', setVolumeBar);
+volumeIcon.addEventListener('click', toggleMute);
 
 // Update DOM
 function loadSong(song) {

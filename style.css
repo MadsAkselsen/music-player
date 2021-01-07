@@ -119,11 +119,13 @@ h3 {
 }
 
 .volume-container {
+  position: absolute;
   background: white;
   border-radius: 5px;
   cursor: pointer;
   height: 4px;
   width: 65px;
+  left: 25px;
 }
 
 .volume-bar {
