@@ -9,6 +9,9 @@ const durationElement = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
+const volumeIcon = document.getElementById('volume-icon');
+const volumeContainer = document.getElementById('volume-container');
+const volumeBar = document.getElementById('volume-bar');
 
 // Music
 const songs = [

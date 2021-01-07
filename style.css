@@ -82,9 +82,11 @@ h3 {
 /* Controls */
 .player-controls {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: -15px;
-  left: 120px;
-  width: 200px;
+  width: 100%;
 }
 
 .fas {
@@ -95,8 +97,42 @@ h3 {
   user-select: none;
 }
 
+.fa-forward {
+  margin-right: 0px;
+}
+
 .fas:hover {
   filter: brightness(80%);
+}
+
+.volume-controls {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 75%;
+  margin-top: 10px;
+}
+
+.volume-icon {
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+.volume-container {
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 4px;
+  width: 65px;
+}
+
+.volume-bar {
+  background: #242323;
+  border-radius: 5px;
+  height: 100%;
+  /* change this to show progress */
+  width: 60%;
+  transition: width 0.1s linear;
 }
 
 .main-button {
